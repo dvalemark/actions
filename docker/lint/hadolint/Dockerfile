@@ -1,0 +1,1 @@
+FROM hadolint/hadolint

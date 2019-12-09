@@ -1,0 +1,13 @@
+name: 'Dockerfile Lint'
+description: 'Lint a docker file'
+inputs:
+  path:
+    description: 'Path to the docker image'
+    required: true
+  file:
+    description: 'Name of the Dockerfile'
+    required: false
+    default: Dockerfile
+runs:
+  using: 'docker'
+  image: 'Dockerfile'

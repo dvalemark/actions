@@ -1,0 +1,17 @@
+name: 'Trivy Scan'
+description: 'A Simple and Comprehensive Vulnerability Scanner for Containers'
+inputs:
+  image:
+    description: 'The name of the docker image to scan'
+    required: true
+  output:
+    description: 'Path to trivy output'
+    required: false
+    default: /output/trivy.json
+  ignore:
+    description: 'Path to the .trivyignore file'
+    required: false
+    default: /.trivyignore
+runs:
+  using: 'docker'
+  image: 'Dockerfile'

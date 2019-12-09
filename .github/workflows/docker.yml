@@ -1,0 +1,43 @@
+name: Docker
+on:
+  push:
+    branches:
+      - master
+jobs:
+  audit-trivy:
+    name: Trivy Scan
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        image:
+          - docker/audit/trivy
+          - docker/lint/hadolint
+    steps:
+      - uses: actions/checkout@master
+        with:
+          fetch-depth: 1
+      - name: build
+        run: make build DOCKER_PATH=./${{ matrix.image }} DOCKER_IMAGE=${{ matrix.image }}
+      - uses: dogmatic69/actions/docker/audit/trivy@master
+        with:
+          image: ${{ matrix.image }}
+          path: ./${{ matrix.image }}
+
+  lint-hadolint:
+    name: Trivy Scan
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        image:
+          - docker/audit/trivy
+          - docker/lint/hadolint
+    steps:
+      - uses: actions/checkout@master
+        with:
+          fetch-depth: 1
+      - name: build
+        run: make build DOCKER_PATH=./${{ matrix.image }} DOCKER_IMAGE=${{ matrix.image }}
+      - uses: dogmatic69/actions/docker/audit/trivy@master
+        with:
+          image: ${{ matrix.image }}
+          path: ./${{ matrix.image }}

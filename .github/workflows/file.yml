@@ -1,0 +1,26 @@
+name: Files
+on:
+  push:
+    branches:
+      - master
+jobs:
+  audit-trivy:
+    name: File Lint
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        command:
+          - cr
+          - crlf
+          - trailing-newline
+          - trailing-single-newline
+          - trailing-space
+          - utf8
+          - utf8-bom
+    steps:
+      - uses: actions/checkout@master
+        with:
+          fetch-depth: 1
+      - uses: dogmatic69/actions/file/lint/awesome-ci@master
+        with:
+          command: file-${{ matrix.command }}

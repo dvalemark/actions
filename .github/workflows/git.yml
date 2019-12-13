@@ -21,6 +21,6 @@ jobs:
       - uses: actions/checkout@master
         with:
           fetch-depth: 0
-      - uses: dogmatic69/actions/git/lint/awesome-ci@feature/git-lint
+      - uses: dogmatic69/actions/git/lint/awesome-ci@master
         with:
           command: git-${{ matrix.command }}

@@ -1,0 +1,17 @@
+name: 'Git Lint'
+description: 'Lint the git repo for common errors'
+inputs:
+  command:
+    description: 'The specific command to be executed'
+    required: true
+  path:
+    description: 'The path to be scanned'
+    required: false
+    default: /github/workspace
+  ignore:
+    description: 'List of paths to be ignored'
+    required: false
+    default: .git
+runs:
+  using: 'docker'
+  image: 'Dockerfile'

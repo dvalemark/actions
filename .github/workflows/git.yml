@@ -1,0 +1,26 @@
+name: Git related CI
+
+on:
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - master
+
+jobs:
+  git-lint:
+    name: Git Lint
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        command:
+          - conflicts
+          - ignored
+    steps:
+      - uses: actions/checkout@master
+        with:
+          fetch-depth: 0
+      - uses: dogmatic69/actions/git/lint/awesome-ci@feature/git-lint
+        with:
+          command: git-${{ matrix.command }}

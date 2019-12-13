@@ -7,6 +7,7 @@ on:
   push:
     branches:
       - master
+
 jobs:
   audit-trivy:
     name: Trivy Scan
@@ -18,6 +19,7 @@ jobs:
           - docker/lint/hadolint
           - file/lint/awesome-ci
           - file/lint/checkmake
+          - git/lint/awesome-ci
     steps:
       - uses: actions/checkout@master
         with:

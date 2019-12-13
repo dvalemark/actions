@@ -4,8 +4,8 @@ on:
     branches:
       - master
 jobs:
-  audit-trivy:
-    name: File Lint
+  file-lint:
+    name: General File Lint
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -24,3 +24,9 @@ jobs:
       - uses: dogmatic69/actions/file/lint/awesome-ci@master
         with:
           command: file-${{ matrix.command }}
+
+  makefile-lint:
+    name: Makefile Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: dogmatic69/actions/file/lint/checkmake@master

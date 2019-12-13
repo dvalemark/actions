@@ -1,0 +1,10 @@
+name: Checkmake
+description: Lint Makefiles using Checkmake
+inputs:
+  path:
+    description: 'The path to be scanned for make files'
+    required: false
+    default: /github/workspace
+runs:
+  using: 'docker'
+  image: 'Dockerfile'

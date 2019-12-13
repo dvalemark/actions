@@ -24,3 +24,13 @@ jobs:
       - uses: dogmatic69/actions/git/lint/awesome-ci@master
         with:
           command: git-${{ matrix.command }}
+  gitleaks:
+    name: GitLeaks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+        with:
+          fetch-depth: 0
+      - uses: dogmatic69/actions/git/audit/gitleaks@feature/gitleaks
+        with:
+          command: git-${{ matrix.command }}

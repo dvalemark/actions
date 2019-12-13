@@ -19,6 +19,7 @@ jobs:
           - docker/lint/hadolint
           - file/lint/awesome-ci
           - file/lint/checkmake
+          - git/audit/gitleaks
           - git/lint/awesome-ci
     steps:
       - uses: actions/checkout@master

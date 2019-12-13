@@ -1,5 +1,9 @@
-name: Docker
+name: Docker related CI
+
 on:
+  pull_request:
+    branches:
+      - master
   push:
     branches:
       - master
@@ -12,6 +16,8 @@ jobs:
         image:
           - docker/audit/trivy
           - docker/lint/hadolint
+          - file/lint/awesome-ci
+          - file/lint/checkmake
     steps:
       - uses: actions/checkout@master
         with:

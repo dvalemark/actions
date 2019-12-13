@@ -31,6 +31,6 @@ jobs:
       - uses: actions/checkout@master
         with:
           fetch-depth: 0
-      - uses: dogmatic69/actions/git/audit/gitleaks@feature/gitleaks
+      - uses: dogmatic69/actions/git/audit/gitleaks@master
         with:
           command: git-${{ matrix.command }}

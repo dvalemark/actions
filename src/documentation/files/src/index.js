@@ -88,7 +88,7 @@ const find = require('find'),
   find.file(/action.ya?ml$/, dir, async (files) => {
     const output = files.map(file => {
       const dir = file
-        .replace('/github/workspace/', '')
+        .replace('/work/', '')
         .replace('/action', '')
         .replace('.yml', '')
         .replace('.yaml', '');
@@ -96,7 +96,7 @@ const find = require('find'),
       const doc = yaml.safeLoad(fs.readFileSync(file, 'utf8')),
         filename = `${dir.replace(/\//gi, '-')}.md`;
 
-      fs.writeFileSync(`/github/workspace/docs/${filename}`, parse(dir, doc));
+      fs.writeFileSync(`/work/docs/${filename}`, parse(dir, doc));
 
       return `- [${doc.name}](./${filename})`
     });
@@ -113,4 +113,4 @@ const find = require('find'),
       output.join("\n"),
     ].join("\n") + "\n");
   });
-})('/github/workspace');
+})('/work');

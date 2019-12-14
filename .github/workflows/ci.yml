@@ -135,8 +135,8 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: Build docs
-        if: steps.extract_branch.outputs.branch == 'master'
-        run: make -C ./src/ run
+        run: |
+          make -C ${GITHUB_WORKSPACE}/src/documentation run
       - name: Commit files
         run: |
           cd ${GITHUB_WORKSPACE}

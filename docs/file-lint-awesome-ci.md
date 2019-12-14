@@ -1,6 +1,6 @@
-# Git Lint [docker action]
+# File Lint [docker action]
 
-Lint the git repo for common errors
+Lint various files in many ways (CR / CRLF / trailing \n / etc)
 
 ## Inputs
 
@@ -31,12 +31,12 @@ List of paths to be ignored
 
 This example has only required inputs, with dummy data
 
-    git-lint:
-      name: Git Lint
+    file-lint:
+      name: File Lint
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@master
-        - uses: foo/bar/git/lint/awesome-ci@master
+        - uses: file/lint/awesome-ci@master
           with:
             command: foobar
 
@@ -44,12 +44,12 @@ This example has only required inputs, with dummy data
 
 This example has all possible inputs, with dummy data.
 
-    git-lint:
-      name: Git Lint
+    file-lint:
+      name: File Lint
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@master
-        - uses: foo/bar/git/lint/awesome-ci@master
+        - uses: file/lint/awesome-ci@master
           with:
             command: foobar
             path: foobar

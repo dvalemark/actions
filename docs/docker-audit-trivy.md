@@ -36,7 +36,7 @@ This example has only required inputs, with dummy data
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@master
-        - uses: foo/bar/docker/audit/trivy@master
+        - uses: docker/audit/trivy@master
           with:
             image: foobar
 
@@ -49,7 +49,7 @@ This example has all possible inputs, with dummy data.
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@master
-        - uses: foo/bar/docker/audit/trivy@master
+        - uses: docker/audit/trivy@master
           with:
             image: foobar
             output: foobar

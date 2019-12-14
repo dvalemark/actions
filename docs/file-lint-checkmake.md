@@ -22,7 +22,7 @@ This example has only required inputs, with dummy data
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@master
-        - uses: foo/bar/file/lint/checkmake@master
+        - uses: file/lint/checkmake@master
           null
 
 
@@ -33,6 +33,6 @@ This example has all possible inputs, with dummy data.
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@master
-        - uses: foo/bar/file/lint/checkmake@master
+        - uses: file/lint/checkmake@master
           with:
             path: foobar

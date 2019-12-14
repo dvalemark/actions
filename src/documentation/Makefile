@@ -21,6 +21,7 @@ build: clean
 .PHONY: run
 run: build
 	docker run --rm \
+		--env GITHUB_REPOSITORY=$(GITHUB_REPOSITORY) \
 		--env INPUT_PATH=/github/workspace \
 		--env INPUT_COMMAND=git-$(COMMAND) \
 		-v $(realpath ../../):/github/workspace \

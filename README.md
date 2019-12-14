@@ -7,4 +7,22 @@
 
 A collection of GitHub actions to push quality code agenda in an automated way.
 
-See here for the [full docs](https://dogmatic69.github.io/actions/)
+See here for the [full docs][1]
+
+# Examples of use
+
+## This Project
+
+This project does some hard core [dogfooding][4].  :). Have a look
+in the [workflows folder][2] to see how we've implemented the actions.
+
+## Micro Services
+
+- The [Awesome Project][3] is a monorepo setup making use of these actions
+and more.
+
+
+[1]: https://dogmatic69.github.io/actions/
+[2]: ./.github/workflows
+[3]: https://github.com/dogmatic69/awesome-project
+[4]: https://en.wikipedia.org/wiki/Eating_your_own_dog_food

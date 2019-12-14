@@ -75,7 +75,7 @@ const find = require('find'),
         const badges = files.map(file => {
           const doc = yaml.safeLoad(fs.readFileSync(file, 'utf8'));
           return [
-            `[![CI Pipeline]`,
+            `[![${doc.name}]`,
             `(https://github.com/${repo}/workflows/${encodeURIComponent(doc.name)}/badge.svg)]`,
             `(https://github.com/${repo})`
           ].join('');

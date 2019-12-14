@@ -1,10 +1,17 @@
 # GitHub Actions
 
+
 Below is a list of all the available GitHub actions.
 
-- [Trivy Scan](./foo-bar-docker-audit-trivy.md)
-- [Dockerfile Lint](./foo-bar-docker-lint-hadolint.md)
-- [File Lint](./foo-bar-file-lint-awesome-ci.md)
-- [Checkmake](./foo-bar-file-lint-checkmake.md)
-- [GitLeaks](./foo-bar-git-audit-gitleaks.md)
-- [Git Lint](./foo-bar-git-lint-awesome-ci.md)
+[![CI Pipeline](https://github.com/foo/bar/workflows/Create%20WIP%20PR/badge.svg)](https://github.com/foo/bar)
+[![CI Pipeline](https://github.com/foo/bar/workflows/Code%20CI/badge.svg)](https://github.com/foo/bar)
+[![CI Pipeline](https://github.com/foo/bar/workflows/Docker%20related%20CI/badge.svg)](https://github.com/foo/bar)
+[![CI Pipeline](https://github.com/foo/bar/workflows/General%20File%20related%20CI/badge.svg)](https://github.com/foo/bar)
+[![CI Pipeline](https://github.com/foo/bar/workflows/Git%20related%20CI/badge.svg)](https://github.com/foo/bar)
+
+- [Trivy Scan](./docker-audit-trivy.md)
+- [Dockerfile Lint](./docker-lint-hadolint.md)
+- [File Lint](./file-lint-awesome-ci.md)
+- [Checkmake](./file-lint-checkmake.md)
+- [GitLeaks](./git-audit-gitleaks.md)
+- [Git Lint](./git-lint-awesome-ci.md)

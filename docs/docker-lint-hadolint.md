@@ -29,7 +29,7 @@ This example has only required inputs, with dummy data
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@master
-        - uses: foo/bar/docker/lint/hadolint@master
+        - uses: docker/lint/hadolint@master
           with:
             path: foobar
 
@@ -41,7 +41,7 @@ This example has all possible inputs, with dummy data.
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@master
-        - uses: foo/bar/docker/lint/hadolint@master
+        - uses: docker/lint/hadolint@master
           with:
             path: foobar
             file: foobar

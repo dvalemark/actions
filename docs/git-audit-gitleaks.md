@@ -32,7 +32,7 @@ This example has only required inputs, with dummy data
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@master
-        - uses: foo/bar/git/audit/gitleaks@master
+        - uses: git/audit/gitleaks@master
           null
 
 
@@ -43,6 +43,6 @@ This example has all possible inputs, with dummy data.
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@master
-        - uses: foo/bar/git/audit/gitleaks@master
+        - uses: git/audit/gitleaks@master
           with:
             path: foobar

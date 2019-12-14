@@ -69,15 +69,34 @@ const find = require('find'),
     ].join("\n");
   }
 
-  find.file(/action.ya?ml$/, dir, (files) => {
+  const badges = (dir, repo) => {
+    return new Promise((resolve, reject) => {
+      find.file(/\.github\/workflows/, dir, (files) => {
+        const badges = files.map(file => {
+          const doc = yaml.safeLoad(fs.readFileSync(file, 'utf8'));
+          return [
+            `[![CI Pipeline]`,
+            `(https://github.com/${repo}/workflows/${encodeURIComponent(doc.name)}/badge.svg)]`,
+            `(https://github.com/${repo})`
+          ].join('');
+        });
+        return resolve(badges.join("\n"));
+      });
+    });
+  }
+
+  find.file(/action.ya?ml$/, dir, async (files) => {
     const output = files.map(file => {
-      const dir = file.split('/github/workspace/')[1].split('/action')[0]
-        repo = `${process.env.GITHUB_REPOSITORY}/${dir}`;
+      const dir = file
+        .replace('/github/workspace/', '')
+        .replace('/action', '')
+        .replace('.yml', '')
+        .replace('.yaml', '');
 
       const doc = yaml.safeLoad(fs.readFileSync(file, 'utf8')),
-        filename = `${repo.replace(/\//gi, '-')}.md`;
+        filename = `${dir.replace(/\//gi, '-')}.md`;
 
-      fs.writeFileSync(`/github/workspace/docs/${filename}`, parse(repo, doc));
+      fs.writeFileSync(`/github/workspace/docs/${filename}`, parse(dir, doc));
 
       return `- [${doc.name}](./${filename})`
     });
@@ -86,7 +105,10 @@ const find = require('find'),
     fs.writeFileSync(readme, [
       `# GitHub Actions`,
       '',
+      ,
       'Below is a list of all the available GitHub actions.',
+      '',
+      await badges(dir, process.env.GITHUB_REPOSITORY),
       '',
       output.join("\n"),
     ].join("\n") + "\n");

@@ -92,7 +92,7 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: build
-        run: make build DOCKER_PATH=./${{ matrix.image }} DOCKER_IMAGE=${{ matrix.image }}
+        run: docker build -t ${{ matrix.image }} ./${{ matrix.image }}
       - uses: dogmatic69/actions/docker/audit/trivy@master
         with:
           image: ${{ matrix.image }}

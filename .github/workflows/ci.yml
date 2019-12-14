@@ -92,33 +92,18 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: build
-        run: make build DOCKER_PATH=./${{ matrix.image }} DOCKER_IMAGE=${{ matrix.image }}
+        run: docker build -t ${{ matrix.image }} ./${{ matrix.image }}
       - uses: dogmatic69/actions/docker/audit/trivy@master
         with:
           image: ${{ matrix.image }}
           path: ./${{ matrix.image }}
 
   lint-hadolint:
-    name: Trivy Scan
+    name: Hadolint
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        image:
-          - docker/audit/trivy
-          - docker/lint/hadolint
-          - file/lint/awesome-ci
-          - file/lint/checkmake
-          - git/audit/gitleaks
-          - git/lint/awesome-ci
-          - src/documentation
     steps:
       - uses: actions/checkout@master
-      - name: build
-        run: make build DOCKER_PATH=./${{ matrix.image }} DOCKER_IMAGE=${{ matrix.image }}
-      - uses: dogmatic69/actions/docker/audit/trivy@master
-        with:
-          image: ${{ matrix.image }}
-          path: ./${{ matrix.image }}
+      - uses: dogmatic69/actions/docker/lint/hadolint@master
 
   #############################################################################
   #

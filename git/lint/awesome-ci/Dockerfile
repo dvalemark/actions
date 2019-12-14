@@ -1,4 +1,4 @@
-FROM cytopia/awesome-ci
+FROM dogmatic69/awesome-ci:1.0.0
 
 COPY files/ /
 

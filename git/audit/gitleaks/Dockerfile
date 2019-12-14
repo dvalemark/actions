@@ -1,4 +1,4 @@
-FROM zricethezav/gitleaks
+FROM dogmatic69/gitleaks:1.0.0
 
 COPY files/ /
 

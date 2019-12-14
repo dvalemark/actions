@@ -9,119 +9,145 @@ on:
       - master
 
 jobs:
+  # #############################################################################
+  # #
+  # # File related CI
+  # #
+  # #############################################################################
+  # file-lint:
+  #   name: General File Lint
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       command:
+  #         - cr
+  #         - crlf
+  #         - trailing-newline
+  #         - trailing-single-newline
+  #         - trailing-space
+  #         - utf8
+  #         - utf8-bom
+  #   steps:
+  #     - uses: actions/checkout@master
+  #     - uses: dogmatic69/actions/file/lint/awesome-ci@master
+  #       with:
+  #         command: file-${{ matrix.command }}
+
+  # makefile-lint:
+  #   name: Makefile Lint
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: dogmatic69/actions/file/lint/checkmake@master
+
+  # #############################################################################
+  # #
+  # # Git related CI
+  # #
+  # #############################################################################
+  # git-lint:
+  #   name: Git Lint
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       command:
+  #         - conflicts
+  #         - ignored
+  #   steps:
+  #     - uses: actions/checkout@master
+  #       with:
+  #         fetch-depth: 0
+  #     - uses: dogmatic69/actions/git/lint/awesome-ci@master
+  #       with:
+  #         command: git-${{ matrix.command }}
+
+  # gitleaks:
+  #   name: GitLeaks
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@master
+  #       with:
+  #         fetch-depth: 0
+  #     - uses: dogmatic69/actions/git/audit/gitleaks@master
+  #       with:
+  #         command: git-${{ matrix.command }}
+
+  # #############################################################################
+  # #
+  # # Docker related CI
+  # #
+  # #############################################################################
+  # audit-trivy:
+  #   name: Trivy Scan
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       image:
+  #         - docker/audit/trivy
+  #         - docker/lint/hadolint
+  #         - file/lint/awesome-ci
+  #         - file/lint/checkmake
+  #         - git/audit/gitleaks
+  #         - git/lint/awesome-ci
+  #         - src/documentation
+  #   steps:
+  #     - uses: actions/checkout@master
+  #     - name: build
+  #       run: make build DOCKER_PATH=./${{ matrix.image }} DOCKER_IMAGE=${{ matrix.image }}
+  #     - uses: dogmatic69/actions/docker/audit/trivy@master
+  #       with:
+  #         image: ${{ matrix.image }}
+  #         path: ./${{ matrix.image }}
+
+  # lint-hadolint:
+  #   name: Trivy Scan
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       image:
+  #         - docker/audit/trivy
+  #         - docker/lint/hadolint
+  #         - file/lint/awesome-ci
+  #         - file/lint/checkmake
+  #         - git/audit/gitleaks
+  #         - git/lint/awesome-ci
+  #         - src/documentation
+  #   steps:
+  #     - uses: actions/checkout@master
+  #     - name: build
+  #       run: make build DOCKER_PATH=./${{ matrix.image }} DOCKER_IMAGE=${{ matrix.image }}
+  #     - uses: dogmatic69/actions/docker/audit/trivy@master
+  #       with:
+  #         image: ${{ matrix.image }}
+  #         path: ./${{ matrix.image }}
+
   #############################################################################
   #
-  # Lint
+  # Project maintenance
   #
   #############################################################################
-  file-lint:
-    name: General File Lint
+  update-docs:
+    name: Update Documentation
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        command:
-          - cr
-          - crlf
-          - trailing-newline
-          - trailing-single-newline
-          - trailing-space
-          - utf8
-          - utf8-bom
+    # needs: [
+    #   file-lint, makefile-lint, git-lint, gitleaks, audit-trivy, lint-hadolint,
+    # ]
+    # if: github.ref == 'refs/heads/master'
     steps:
       - uses: actions/checkout@master
+      - name: Build docs
+        if: steps.extract_branch.outputs.branch == 'master'
+        run: make -C ./src/ run
+      - name: Commit files
+        run: |
+          cd ${GITHUB_WORKSPACE}
+          git config --local user.email "actions@dogmatic69.com"
+          git config --local user.name "Action Bot"
+          git checkout -b test
+          git add docs || true
+          git commit -m "Update documentation" -a || true
+      - name: Push changes
+        uses: ad-m/github-push-action@master
         with:
-          fetch-depth: 1
-      - uses: dogmatic69/actions/file/lint/awesome-ci@master
-        with:
-          command: file-${{ matrix.command }}
-
-  makefile-lint:
-    name: Makefile Lint
-    runs-on: ubuntu-latest
-    steps:
-      - uses: dogmatic69/actions/file/lint/checkmake@master
-
-  #############################################################################
-  #
-  # Git
-  #
-  #############################################################################
-  git-lint:
-    name: Git Lint
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        command:
-          - conflicts
-          - ignored
-    steps:
-      - uses: actions/checkout@master
-        with:
-          fetch-depth: 0
-      - uses: dogmatic69/actions/git/lint/awesome-ci@master
-        with:
-          command: git-${{ matrix.command }}
-
-  gitleaks:
-    name: GitLeaks
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@master
-        with:
-          fetch-depth: 0
-      - uses: dogmatic69/actions/git/audit/gitleaks@master
-        with:
-          command: git-${{ matrix.command }}
-
-  #############################################################################
-  #
-  # Docker
-  #
-  #############################################################################
-  audit-trivy:
-    name: Trivy Scan
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        image:
-          - docker/audit/trivy
-          - docker/lint/hadolint
-          - file/lint/awesome-ci
-          - file/lint/checkmake
-          - git/audit/gitleaks
-          - git/lint/awesome-ci
-          - src/documentation
-    steps:
-      - uses: actions/checkout@master
-        with:
-          fetch-depth: 1
-      - name: build
-        run: make build DOCKER_PATH=./${{ matrix.image }} DOCKER_IMAGE=${{ matrix.image }}
-      - uses: dogmatic69/actions/docker/audit/trivy@master
-        with:
-          image: ${{ matrix.image }}
-          path: ./${{ matrix.image }}
-
-  lint-hadolint:
-    name: Trivy Scan
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        image:
-          - docker/audit/trivy
-          - docker/lint/hadolint
-          - file/lint/awesome-ci
-          - file/lint/checkmake
-          - git/audit/gitleaks
-          - git/lint/awesome-ci
-          - src/documentation
-    steps:
-      - uses: actions/checkout@master
-        with:
-          fetch-depth: 1
-      - name: build
-        run: make build DOCKER_PATH=./${{ matrix.image }} DOCKER_IMAGE=${{ matrix.image }}
-      - uses: dogmatic69/actions/docker/audit/trivy@master
-        with:
-          image: ${{ matrix.image }}
-          path: ./${{ matrix.image }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: test
+          force: true

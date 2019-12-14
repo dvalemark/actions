@@ -11,7 +11,7 @@ on:
 jobs:
   #############################################################################
   #
-  # Lint
+  # File related CI
   #
   #############################################################################
   file-lint:
@@ -29,8 +29,6 @@ jobs:
           - utf8-bom
     steps:
       - uses: actions/checkout@master
-        with:
-          fetch-depth: 1
       - uses: dogmatic69/actions/file/lint/awesome-ci@master
         with:
           command: file-${{ matrix.command }}
@@ -43,7 +41,7 @@ jobs:
 
   #############################################################################
   #
-  # Git
+  # Git related CI
   #
   #############################################################################
   git-lint:
@@ -75,7 +73,7 @@ jobs:
 
   #############################################################################
   #
-  # Docker
+  # Docker related CI
   #
   #############################################################################
   audit-trivy:
@@ -93,8 +91,6 @@ jobs:
           - src/documentation
     steps:
       - uses: actions/checkout@master
-        with:
-          fetch-depth: 1
       - name: build
         run: make build DOCKER_PATH=./${{ matrix.image }} DOCKER_IMAGE=${{ matrix.image }}
       - uses: dogmatic69/actions/docker/audit/trivy@master
@@ -117,11 +113,38 @@ jobs:
           - src/documentation
     steps:
       - uses: actions/checkout@master
-        with:
-          fetch-depth: 1
       - name: build
         run: make build DOCKER_PATH=./${{ matrix.image }} DOCKER_IMAGE=${{ matrix.image }}
       - uses: dogmatic69/actions/docker/audit/trivy@master
         with:
           image: ${{ matrix.image }}
           path: ./${{ matrix.image }}
+
+  #############################################################################
+  #
+  # Project maintenance
+  #
+  #############################################################################
+  update-docs:
+    name: Update Documentation
+    runs-on: ubuntu-latest
+    needs: [
+      file-lint, makefile-lint, git-lint, gitleaks, audit-trivy, lint-hadolint,
+    ]
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - uses: actions/checkout@master
+      - name: Build docs
+        if: steps.extract_branch.outputs.branch == 'master'
+        run: make -C ./src/ run
+      - name: Commit files
+        run: |
+          cd ${GITHUB_WORKSPACE}
+          git config --local user.email "actions@dogmatic69.com"
+          git config --local user.name "Action Bot"
+          git add docs || true
+          git commit -m "Update documentation" -a || true
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}

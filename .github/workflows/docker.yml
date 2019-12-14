@@ -21,6 +21,7 @@ jobs:
           - file/lint/checkmake
           - git/audit/gitleaks
           - git/lint/awesome-ci
+          - src/documentation
     steps:
       - uses: actions/checkout@master
         with:
@@ -40,6 +41,11 @@ jobs:
         image:
           - docker/audit/trivy
           - docker/lint/hadolint
+          - file/lint/awesome-ci
+          - file/lint/checkmake
+          - git/audit/gitleaks
+          - git/lint/awesome-ci
+          - src/documentation
     steps:
       - uses: actions/checkout@master
         with:

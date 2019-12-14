@@ -2,18 +2,10 @@ name: 'File Lint'
 description: |
   Lint various files in many ways (CR / CRLF / trailing \n / etc)
 
-  To save space in workflow files, its possible to use the matrix to run this job multiple times with a different command. Eg:
+  To save space in workflow files, its possible to use the matrix to run
+  this job multiple times with a different command.
 
-    strategy:
-      matrix:
-        command:
-          - cr
-          - crlf
-    steps:
-      - uses: actions/checkout@master
-      - uses: dogmatic69/actions/file/lint/awesome-ci@master
-        with:
-          command: file-${{ matrix.command }}
+  Adapted from [cytopia/awesome-ci](https://github.com/cytopia/awesome-ci).
 
 inputs:
   command:

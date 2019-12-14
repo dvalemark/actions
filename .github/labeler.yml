@@ -1,0 +1,21 @@
+# For the actual actions
+actions:
+  - docker/**
+  - file/**
+  - git/**
+
+# Maintaining the actions
+ci:
+  - .github/workflows/*
+  - src/documentation/**
+
+maintainence:
+  - ./*
+  - .github/*
+  - .github/ISSUE_TEMPLATE/*
+
+documentation:
+  - README.md
+  - ./**/README*
+  - docs/**
+  - src/documentation/**

@@ -1,5 +1,9 @@
 name: 'Trivy Scan'
-description: 'A Simple and Comprehensive Vulnerability Scanner for Containers'
+description: |
+  `Trivy` (`tri` pronounced like **tri**gger, `vy` pronounced like en**vy**) is a simple and comprehensive vulnerability scanner for containers.
+  A software vulnerability is a glitch, flaw, or weakness present in the software or in an Operating System.
+  `Trivy` detects vulnerabilities of OS packages (Alpine, RHEL, CentOS, etc.) and application dependencies (Bundler, Composer, npm, yarn etc.).
+
 inputs:
   image:
     description: 'The name of the docker image to scan'

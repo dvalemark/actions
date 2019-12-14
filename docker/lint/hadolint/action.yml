@@ -12,12 +12,9 @@ description: |
 
 inputs:
   path:
-    description: 'Path to the docker image to be scanned'
-    required: true
-  file:
-    description: 'Name of the Dockerfile, defaults to `Dockerfile`'
+    description: Path to search for Dockerfiles that iwll be scanned
     required: false
-    default: Dockerfile
+    default: /github/workspace
 runs:
   using: 'docker'
   image: 'Dockerfile'

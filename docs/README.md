@@ -7,7 +7,7 @@ Below is a list of all the available GitHub actions.
 [![CI](https://github.com/dogmatic69/actions/workflows/CI/badge.svg)](https://github.com/dogmatic69/actions)
 
 - [Trivy Scan](./docker-audit-trivy.md)
-- [Dockerfile Lint](./docker-lint-hadolint.md)
+- [Dockerfile Linter](./docker-lint-hadolint.md)
 - [File Lint](./file-lint-awesome-ci.md)
 - [Checkmake](./file-lint-checkmake.md)
 - [GitLeaks](./git-audit-gitleaks.md)

@@ -1,12 +1,16 @@
 # Checkmake [docker action]
 
-Lint Makefiles using Checkmake
+Lint Makefiles using Checkmake.
+
+> checkmake is an experimental tool for linting and checking Makefiles. It may not do what you want it to.
+
 
 ## Inputs
 
 #### path
 
-The path to be scanned for make files
+The path to the repository that will be checked. Defaults to the location of `actions/checkout` default path.
+
 
 - required: False
 - default: /github/workspace

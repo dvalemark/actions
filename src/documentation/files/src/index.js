@@ -11,7 +11,7 @@ const find = require('find'),
       `${config.description}`,
       '',
       `- required: ${config.required ? 'True' : 'False'}`,
-      `- default: ${config.required || 'None'}`,
+      `- default: ${config.default || 'None'}`,
       '',
       '',
     ].join("\n");

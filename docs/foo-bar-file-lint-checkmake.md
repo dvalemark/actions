@@ -9,7 +9,7 @@ Lint Makefiles using Checkmake
 The path to be scanned for make files
 
 - required: False
-- default: None
+- default: /github/workspace
 
 
 

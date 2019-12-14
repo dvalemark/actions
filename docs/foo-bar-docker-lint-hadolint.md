@@ -9,14 +9,14 @@ Lint a docker file
 Path to the docker image
 
 - required: True
-- default: true
+- default: None
 
 #### file
 
 Name of the Dockerfile
 
 - required: False
-- default: None
+- default: Dockerfile
 
 
 

@@ -15,17 +15,10 @@ Adapted from [hadolint/hadolint](https://github.com/hadolint/hadolint)
 
 #### path
 
-Path to the docker image to be scanned
-
-- required: True
-- default: None
-
-#### file
-
-Name of the Dockerfile, defaults to `Dockerfile`
+Path to search for Dockerfiles that iwll be scanned
 
 - required: False
-- default: Dockerfile
+- default: /github/workspace
 
 
 
@@ -39,8 +32,7 @@ This example has only required inputs, with dummy data
       steps:
         - uses: actions/checkout@master
         - uses: docker/lint/hadolint@master
-          with:
-            path: foobar
+          null
 
 
 This example has all possible inputs, with dummy data.
@@ -53,4 +45,3 @@ This example has all possible inputs, with dummy data.
         - uses: docker/lint/hadolint@master
           with:
             path: foobar
-            file: foobar

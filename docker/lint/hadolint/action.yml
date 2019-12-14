@@ -1,11 +1,21 @@
-name: 'Dockerfile Lint'
-description: 'Lint a docker file'
+name: 'Dockerfile Linter'
+description: |
+  A smarter Dockerfile linter that helps you build [best practice][] Docker
+  images. The linter is parsing the Dockerfile into an AST and performs rules on
+  top of the AST. It is standing on the shoulders of [ShellCheck][] to lint
+  the Bash code inside `RUN` instructions.
+
+  Adapted from [hadolint/hadolint](https://github.com/hadolint/hadolint)
+
+  [best practice]: https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices
+  [ShellCheck]: https://github.com/koalaman/shellcheck
+
 inputs:
   path:
-    description: 'Path to the docker image'
+    description: 'Path to the docker image to be scanned'
     required: true
   file:
-    description: 'Name of the Dockerfile'
+    description: 'Name of the Dockerfile, defaults to `Dockerfile`'
     required: false
     default: Dockerfile
 runs:

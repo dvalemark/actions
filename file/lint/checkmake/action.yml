@@ -1,8 +1,13 @@
 name: Checkmake
-description: Lint Makefiles using Checkmake
+description: |
+  Lint Makefiles using Checkmake.
+
+  > checkmake is an experimental tool for linting and checking Makefiles. It may not do what you want it to.
+
 inputs:
   path:
-    description: 'The path to be scanned for make files'
+    description: |
+      The path to the repository that will be checked. Defaults to the location of `actions/checkout` default path.
     required: false
     default: /github/workspace
 runs:

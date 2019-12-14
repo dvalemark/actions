@@ -9,21 +9,21 @@ A Simple and Comprehensive Vulnerability Scanner for Containers
 The name of the docker image to scan
 
 - required: True
-- default: true
+- default: None
 
 #### output
 
 Path to trivy output
 
 - required: False
-- default: None
+- default: /output/trivy.json
 
 #### ignore
 
 Path to the .trivyignore file
 
 - required: False
-- default: None
+- default: /.trivyignore
 
 
 

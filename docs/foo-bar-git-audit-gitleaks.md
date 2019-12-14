@@ -19,7 +19,7 @@ Audit git repos for secrets. Gitleaks provides a way for you to find unencrypted
 Path to the repo that will be scanned
 
 - required: False
-- default: None
+- default: /github/workspace
 
 
 

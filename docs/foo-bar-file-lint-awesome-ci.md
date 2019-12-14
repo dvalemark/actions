@@ -9,21 +9,21 @@ Lint various files in many ways (CR / CRLF / trailing \n / etc)
 The specific command to be executed
 
 - required: True
-- default: true
+- default: None
 
 #### path
 
 The path to be scanned
 
 - required: False
-- default: None
+- default: /github/workspace
 
 #### ignore
 
 List of paths to be ignored
 
 - required: False
-- default: None
+- default: .git
 
 
 

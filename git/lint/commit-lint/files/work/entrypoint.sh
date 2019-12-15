@@ -29,14 +29,22 @@ if (( ${FOUND} == 0 )); then
   exit 2;
 fi
 
-echo "REPO"
-ls -al ${REPO}
-git -C ${REPO} show || true
-git -C ${REPO} branch || true
+echo "git -C ${REPO} log --oneline"
+git -C ${REPO} log --oneline
 
-echo "${GITHUB_BASE_REF:-master}..${GITHUB_HEAD_REF:-HEAD}"
-echo $(git -C ${REPO} log --pretty="%h" -- ${GITHUB_BASE_REF:-master}..${GITHUB_HEAD_REF:-HEAD});
-for COMMIT_HASH in $(git -C ${REPO} log --pretty="%h" -- ${GITHUB_BASE_REF:-master}..${GITHUB_HEAD_REF:-HEAD}); do
+git -C ${REPO} fetch
+git -C ${REPO} branch
+
+echo "git -C ${REPO} rev-parse --short ${GITHUB_BASE_REF:-master}"
+start=$(git -C ${REPO} rev-parse --short ${GITHUB_BASE_REF:-master}) || echo "problem getting start"
+
+echo "git -C ${REPO} rev-parse --short ${GITHUB_HEAD_REF:-HEAD}"
+end=$(git -C ${REPO} rev-parse --short ${GITHUB_HEAD_REF:-HEAD}) || echo "problem getting end"
+
+echo "Checking commits: [${start}..${end}]"
+echo $(git -C ${REPO} log --pretty="%h" ${start}..${end}) || echo "could not get log"
+
+for COMMIT_HASH in $(git -C ${REPO} log --pretty="%h" ${start}..${end}); do
   echo "Testing commit: ${COMMIT_HASH}" >> ${OUTPUT}
   COMMIT_MESSAGE=$(git -C ${REPO} log --format=%B -n 1 ${COMMIT_HASH})
   echo "${COMMIT_MESSAGE}" | /work/node_modules/.bin/commitlint "$@" >> ${OUTPUT}

@@ -1,4 +1,4 @@
-DOCKER_IMAGE = app
+DOCKER_IMAGE = actions/documentation
 DOCKER_PATH = ./
 GITHUB_REPOSITORY ?= foo/bar
 GITHUB_WORKSPACE ?= /github/workspace

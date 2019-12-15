@@ -44,6 +44,17 @@ jobs:
   # Git related CI
   #
   #############################################################################
+  commit-lint:
+    name: Commit Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+        with:
+          fetch-depth: 0
+      - uses: dogmatic69/actions/git/lint/commit-lint@feature/semantic-commits
+        with:
+          command: git-${{ matrix.command }}
+
   git-lint:
     name: Git Lint
     runs-on: ubuntu-latest

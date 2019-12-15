@@ -1,0 +1,15 @@
+name: Commit Lint
+description: |
+  `commitlint` checks if your commit messages meet the conventional commit format.
+
+  Adapted from [commit-lint](https://github.com/conventional-changelog/commitlint)
+  See also [commitlint-analizer](https://github.com/semantic-release/commit-analyzer) for more.
+inputs:
+  path:
+    description: |
+      The path to the repository that will be checked. Defaults to the location of `actions/checkout` default path.
+    required: false
+    default: /github/workspace
+runs:
+  using: 'docker'
+  image: 'Dockerfile'

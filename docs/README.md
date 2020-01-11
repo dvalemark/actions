@@ -9,6 +9,7 @@ Below is a list of all the available GitHub actions.
 
 - [Trivy Scan](./docker-audit-trivy.md)
 - [Dockerfile Linter](./docker-lint-hadolint.md)
+- [Service Action Runner](./docker-service.md)
 - [File Lint](./file-lint-awesome-ci.md)
 - [Checkmake](./file-lint-checkmake.md)
 - [GitLeaks](./git-audit-gitleaks.md)

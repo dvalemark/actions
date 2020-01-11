@@ -84,6 +84,7 @@ jobs:
         image:
           - docker/audit/trivy
           - docker/lint/hadolint
+          - docker/service
           - file/lint/awesome-ci
           - file/lint/checkmake
           - git/audit/gitleaks

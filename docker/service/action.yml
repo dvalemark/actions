@@ -1,0 +1,14 @@
+name: Service Action Runner
+
+description: Run CI jobs for a particular service in a mono repo
+inputs:
+  service:
+    description: The name of service (folder name relative to root)
+    required: true
+  targets:
+    description: targets to call in the makefile
+    required: true
+    default: lint test
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
